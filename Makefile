@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+	$(PYTHON_INTERPRETER) src/data/make_naive_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -37,6 +37,14 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 src
+
+## clean-pyc
+test:
+	py.test --verbose --color=yes $(TEST_PATH)
+
+## train models and plot results
+run:
+	python -m src.models.train_model.py
 
 ## Upload Data to S3
 sync_data_to_s3:
